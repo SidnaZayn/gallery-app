@@ -2,6 +2,7 @@
   <div>
     <div class="w-full flex"></div>
     <slot />
+    <ImageMode  />
   </div>
 </template>
 
