@@ -1,7 +1,12 @@
 <template>
-    <div class="h-screen w-screen grid grid-cols-6">
-        <AlbumCards component-id="1" :cover-imgs="coverImgs" />
-        <AlbumCards component-id="2" :cover-imgs="coverImgs" />
+    <div>
+        <div class="text-center">
+            <h1 class="text-4xl font-bold font-kode_mono uppercase">The <br> Albums</h1>
+        </div>
+        <div class="h-screen w-screen grid grid-cols-6">
+            <AlbumCards component-id="1" :cover-imgs="coverImgs" />
+            <AlbumCards component-id="2" :cover-imgs="coverImgs" />
+        </div>
     </div>
 </template>
 
