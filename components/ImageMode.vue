@@ -1,6 +1,6 @@
 <template>
   <div
-    class="sticky bottom-[5%] left-[90%] z-10 w-fit p-3 rounded-full bg-white cursor-pointer"
+    class="fixed bottom-[5%] left-[90%] z-10 w-fit p-3 rounded-full bg-white cursor-pointer"
     id="grid-mode"
     :class="{ 'drop-shadow-img-mode': modeOpen === 1 }"
     @click="closeMode('grid')"
@@ -9,7 +9,7 @@
   </div>
 
   <div
-    class="sticky bottom-[5%] left-[90%] z-10 w-fit p-3 rounded-full bg-white cursor-pointer"
+    class="fixed bottom-[5%] left-[90%] z-10 w-fit p-3 rounded-full bg-white cursor-pointer"
     id="fullscreen-mode"
     :class="{ 'drop-shadow-img-mode': modeOpen === 1 }"
     @click="closeMode('fullscreen')"
@@ -18,7 +18,7 @@
   </div>
 
   <div
-    class="sticky bottom-[5%] left-[90%] z-10 w-fit p-3 rounded-full bg-white cursor-pointer"
+    class="fixed bottom-[5%] left-[90%] z-10 w-fit p-3 rounded-full bg-white cursor-pointer"
     id="zoomout-mode"
     :class="{ 'drop-shadow-img-mode': modeOpen === 1 }"
     @click="closeMode('zoomout')"
@@ -27,7 +27,7 @@
   </div>
 
   <div
-    class="sticky bottom-[5%] left-[90%] z-10 w-fit p-3 rounded-full bg-white drop-shadow-img-mode cursor-pointer"
+    class="fixed bottom-[5%] left-[90%] z-10 w-fit p-3 rounded-full bg-white drop-shadow-img-mode cursor-pointer"
     @click="openMode()"
   >
     <span><IconsImage width="2em" height="2em" color="#000" /></span>

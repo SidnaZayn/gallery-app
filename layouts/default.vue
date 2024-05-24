@@ -1,8 +1,7 @@
 <template>
   <div>
-    <div class="w-full flex"></div>
-    <slot />
     <ImageMode  />
+    <slot />
   </div>
 </template>
 

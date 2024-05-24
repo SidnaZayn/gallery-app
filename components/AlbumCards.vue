@@ -1,10 +1,20 @@
 <template>
   <!-- <div class="flex hover:cursor-pointer bg-blue-200 h-[10%]" @mouseover="albumHover"> -->
-  <div class="flex hover:cursor-pointer bg-blue-200 w-fit h-fit rounded-lg border-2 shadow-sm" @mouseover="albumHover"
-    @mouseleave="albumBack">
-    <img v-for="(img, i) in coverImgs" :src="img.img" alt="image"
-      class="absolute rounded-lg border-2 shadow-sm w-24 object-cover" :class="getImageClass(i)"
-      :id="`img_${i}_${componentId}`" />
+  <div
+    class="flex hover:cursor-pointer w-min h-fit shadow-sm"
+    @mouseover="albumHover"
+    @mouseleave="albumBack"
+  >
+    <!-- {{ albumimgs }} -->
+    <img
+      v-for="(img, i) in albumimgs"
+      :src="img.img"
+      alt="image"
+      class="absolute rounded-lg border-2 shadow-sm w-24 object-cover max-h-16"
+      :class="getImageClass(i)"
+      :id="`img_${i}_${componentId}`"
+    />
+    <p class="mt-16 w-full font-josefin">{{ title ? title : "Albums" }}</p>
   </div>
 </template>
 
@@ -14,8 +24,17 @@ import gsap from "gsap";
 const props = defineProps({
   coverImgs: [],
   componentId: { type: String, required: true },
+  title: { type: String },
 });
-
+const albumimgs = computed(() => {
+  const ret = [];
+  props.coverImgs.forEach((img, i) => {
+    if (i < 4) {
+      ret.push(img);
+    }
+  });
+  return ret;
+});
 function getImageClass(i) {
   const classes = {
     "transition-all": i !== 0,
@@ -42,7 +61,7 @@ const albumHover = () => {
           },
           0
         );
-        translateX += 20
+        translateX += 20;
       }
     });
 

@@ -1,0 +1,62 @@
+<template>
+  <div class="w-10/12 mx-auto pt-10 h-[90vh]">
+    <div class="rounded-xl shadow-2xl p-10 h-[100%]">
+      <div class="text-center mb-10">
+        <h1 class="text-5xl font-yeseva tracking-widest">Thè Albums</h1>
+      </div>
+      <div class="w-full grid grid-cols-4 gap-x-24 gap-y-20 px-10">
+        <template v-for="(album, i) in newAlbum" :key="i">
+          <AlbumCards
+            :component-id="i"
+            :cover-imgs="album.imgs"
+            :title="album.group"
+            @click="albumClick(album.group)"
+          />
+        </template>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup>
+const router = useRouter();
+
+const albums = import.meta.glob("../../public/albums/**/*", {
+  as: "url",
+  eager: true,
+});
+
+const new_albums = Object.keys(albums).map((album) => {
+  const al = album.replace("../../public/albums/", "");
+  const group = al.split("/")[0];
+  const id = al.split("/")[1];
+  return { group: group, id: id };
+});
+
+const newAlbum = computed(() => {
+  let group_args;
+  let ret = [];
+  let idx = 0;
+  new_albums.forEach((album, i) => {
+    if (album.group === group_args) {
+      idx++;
+      const imgs = { img: album.group + "/" + album.id, id: idx };
+      ret[ret.length - 1].imgs.push(imgs);
+    } else {
+      idx = 1;
+      group_args = album.group;
+      const a = {
+        group: album.group,
+        imgs: [{ img: album.group + "/" + album.id, id: idx }],
+      };
+      ret.push(a);
+    }
+  });
+  console.log(ret);
+  return ret;
+});
+
+const albumClick = (group) => {
+  router.push("/albums/" + group);
+};
+</script>
