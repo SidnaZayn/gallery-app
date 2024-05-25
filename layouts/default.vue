@@ -7,4 +7,7 @@
 
 
 <script setup>
+useSeoMeta({
+  title: "Galéria - Gallery App",
+})
 </script>
