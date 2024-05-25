@@ -23,10 +23,11 @@
     class="fixed bottom-[5%] left-[90%] z-10 w-fit p-3 rounded-full bg-white cursor-pointer"
     id="zoomout-mode"
     :class="{ 'drop-shadow-img-mode': modeOpen === 1 }"
-    @click="closeMode('zoomout')"
-    title="Zoom Out"
+    @click="zoomInOut()"
+    :title="storeIndex.ImageZoomIn ? 'Zoom Out' : 'Zoom In'"
   >
-    <span><IconsIconZoomOut width="2em" height="2em" color="#000" /></span>
+    <span v-if="!storeIndex.ImageZoomIn"><IconsIconFullscreen width="2em" height="2em" color="#000" /></span>
+    <span v-else><IconsIconZoomOut width="2em" height="2em" color="#000" /></span>
   </div>
 
   <div
@@ -39,8 +40,10 @@
 
 <script setup>
 import { gsap } from "gsap";
+import { useStoreIndex } from "@/stores/StoreIndex";
 
 const modeOpen = ref(0);
+const storeIndex = useStoreIndex();
 
 const tl = gsap.timeline();
 function openMode() {
@@ -63,6 +66,14 @@ function closeMode(mode) {
   tl.reverse();
   modeOpen.value = 2;
   return mode;
+}
+
+function zoomInOut() {
+  storeIndex.ImageZoomIn = !storeIndex.ImageZoomIn; //console.log(storeIndex.ImageZoomIn);
+  const tlZoom = gsap.timeline().to("#img-panel",{
+    scale: storeIndex.ImageZoomIn ? 1 : 0.7,
+  });
+  closeMode("zoomout");
 }
 
 function toTop() {
