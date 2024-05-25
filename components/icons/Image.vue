@@ -2,8 +2,8 @@
 import { defineComponent } from 'vue';
 
 const props = defineProps({
-    width: Number,
-    height: Number,
+    width: String,
+    height: String,
     color:String
 })
 

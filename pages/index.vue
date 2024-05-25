@@ -15,8 +15,9 @@
       </div>
     </div>
     <div class="container-gsap flex min-w-max">
-      <div v-for="(img, i) in imgs" :key="i" class="panel w-screen h-screen">
-        <img :src="img" :alt="`${img}_${i}`" class="w-full h-full max-h-screen object-cover" />
+      <div v-for="(img, i) in thisAlbum" :key="i" class="panel w-screen h-screen">
+        <img v-if="!img.group" :src="'/albums/'+img.id" :alt="`${img.id}_${i}`" class="w-full h-full max-h-screen object-cover" />
+        <img v-else :src="`/albums/${img.group}/${img.id}`" :alt="`${img.id}_${i}`" class="w-full h-full max-h-screen object-cover" />
       </div>
     </div>
   </div>
@@ -51,4 +52,29 @@ onMounted(() => {
 });
 
 const imgs = ["emotions.jpg", "lake.jpg", "ocean.jpg", "polynesia.jpg", "village.jpg"];
+const imgs_ = import.meta.glob("../public/albums/**/*", {
+  query: "?url",
+  import: "default",
+  eager: true,
+});
+
+const thisAlbum = computed(() => {
+  const ret = [];
+  Object.keys(imgs_).forEach((album, i) => {
+    const al = album.replace("../public/albums/", "");
+    const group = al.split("/")[0];
+    //check if last 4 letters are ".jpg" or ".png" or ".jpeg"
+    if (group.split(".").length > 1) {
+      ret.push({ id: group, group: false });
+    }else{
+      const id = al.split("/")[1];
+      ret.push({ id: id, group: group });
+    }
+
+    // if (group == collections) {
+  //   }
+  });
+  return ret;
+}); console.log(thisAlbum.value);
+
 </script>

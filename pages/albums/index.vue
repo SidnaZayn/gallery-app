@@ -22,7 +22,8 @@
 const router = useRouter();
 
 const albums = import.meta.glob("../../public/albums/**/*", {
-  as: "url",
+  query: "?url",
+  import:'default',
   eager: true,
 });
 
