@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Header />
     <ImageMode  />
     <slot />
   </div>

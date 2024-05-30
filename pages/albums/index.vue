@@ -1,6 +1,6 @@
 <template>
-  <div class="w-10/12 mx-auto pt-10 h-[90vh]">
-    <div class="rounded-xl shadow-2xl p-10 h-[100%]">
+  <div class="w-10/12 mx-auto pt-12 h-[90vh] bg-white rounded-xl shadow-2xl">
+    <div class="p-10 h-[100%]">
       <div class="text-center mb-10">
         <h1 class="text-5xl font-yeseva tracking-widest">Thè Albums</h1>
       </div>
