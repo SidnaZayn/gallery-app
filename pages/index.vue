@@ -21,27 +21,49 @@
         </span>
       </div>
     </div>
-    <div class="container-gsap flex min-w-max">
-      <div
-        v-for="(img, i) in thisAlbum"
-        :key="i"
-        class="panel w-screen h-screen"
-        id="img-panel"
-      >
-        <img
-          v-if="!img.group"
-          :src="'/albums/' + img.id"
-          :alt="`${img.id}_${i}`"
-          class="w-full h-full max-h-screen object-cover"
-          :class="[storeIndex.ImageZoomIn? '':'shadow']"
-        />
-        <img
-          v-else
-          :src="`/albums/${img.group}/${img.id}`"
-          :alt="`${img.id}_${i}`"
-          class="w-full h-full max-h-screen object-cover"
-          :class="[storeIndex.ImageZoomIn? '':'shadow']"
-        />
+    <div v-if="storeIndex.ImageZoomIn">
+      <div class="container-gsap flex min-w-max">
+        <div
+          v-for="(img, i) in thisAlbum"
+          :key="i"
+          class="panel w-screen h-screen"
+          id="img-panel"
+        >
+          <img
+            v-if="!img.group"
+            :src="'/albums/' + img.id"
+            :alt="`${img.id}_${i}`"
+            class="w-full h-full max-h-screen object-cover"
+            :class="[storeIndex.ImageZoomIn ? '' : 'shadow']"
+          />
+          <img
+            v-else
+            :src="`/albums/${img.group}/${img.id}`"
+            :alt="`${img.id}_${i}`"
+            class="w-full h-full max-h-screen object-cover"
+            :class="[storeIndex.ImageZoomIn ? '' : 'shadow']"
+          />
+        </div>
+      </div>
+    </div>
+    <div v-else>
+      <div class="grid grid-cols-4">
+        <div v-for="(img, i) in thisAlbum" :key="i" class="h-full w-full">
+          <img
+            v-if="!img.group"
+            :src="'/albums/' + img.id"
+            :alt="`${img.id}_${i}`"
+            class="w-full h-full max-h-screen object-cover"
+            :class="[storeIndex.ImageZoomIn ? '' : 'shadow']"
+          />
+          <img
+            v-else
+            :src="`/albums/${img.group}/${img.id}`"
+            :alt="`${img.id}_${i}`"
+            class="w-full h-full max-h-screen object-cover"
+            :class="[storeIndex.ImageZoomIn ? '' : 'shadow']"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -60,12 +82,13 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 let sections = ref([]);
 let widthPercent = ref(500);
 const storeIndex = useStoreIndex();
+// let tl = gsap.timeline();
 
 onMounted(() => {
   sections.value = gsap.utils.toArray(".panel");
   widthPercent.value = (sections.value.length + 1) * 100;
 
-  gsap.to(sections.value, {
+  storeIndex.tl = storeIndex.tl.to(sections.value, {
     xPercent: -100 * (sections.value.length - 1),
     ease: "none",
     scrollTrigger: {

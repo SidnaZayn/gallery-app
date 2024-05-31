@@ -3,7 +3,7 @@
     class="fixed bottom-[5%] left-[90%] z-10 w-fit p-3 rounded-full bg-white cursor-pointer"
     id="grid-mode"
     :class="{ 'drop-shadow-img-mode': modeOpen === 1 }"
-    @click="closeMode('grid')"
+    @click="toGrid()"
     title="Grid Mode"
   >
     <span><IconsIconGrid width="2em" height="2em" color="#000" /></span>
@@ -26,8 +26,12 @@
     @click="zoomInOut()"
     :title="storeIndex.ImageZoomIn ? 'Zoom Out' : 'Zoom In'"
   >
-    <span v-if="!storeIndex.ImageZoomIn"><IconsIconFullscreen width="2em" height="2em" color="#000" /></span>
-    <span v-else><IconsIconZoomOut width="2em" height="2em" color="#000" /></span>
+    <span v-if="!storeIndex.ImageZoomIn"
+      ><IconsIconFullscreen width="2em" height="2em" color="#000"
+    /></span>
+    <span v-else
+      ><IconsIconZoomOut width="2em" height="2em" color="#000"
+    /></span>
   </div>
 
   <div
@@ -70,7 +74,7 @@ function closeMode(mode) {
 
 function zoomInOut() {
   storeIndex.ImageZoomIn = !storeIndex.ImageZoomIn; //console.log(storeIndex.ImageZoomIn);
-  const tlZoom = gsap.timeline().to("#img-panel",{
+  const tlZoom = gsap.timeline().to("#img-panel", {
     scale: storeIndex.ImageZoomIn ? 1 : 0.7,
   });
   closeMode("zoomout");
@@ -78,6 +82,13 @@ function zoomInOut() {
 
 function toTop() {
   window.scrollTo({ top: 0, behavior: "smooth" });
+  closeMode("grid");
+}
+
+function toGrid() {
+  storeIndex.ImageZoomIn = !storeIndex.ImageZoomIn;
+  const sections = gsap.utils.toArray(".panel");
+  tl.killTweensOf(sections);
   closeMode("grid");
 }
 </script>
