@@ -1,6 +1,22 @@
 <template>
-
+  <div
+    class="w-10/12 rounded-xl shadow-2xl h-[10vh] bg-white dark:bg-slate-800 fixed top-8 left-1/2 translate-x-[-50%] z-[100]"
+  >
+    <div class="grid grid-cols-3 justify-between items-center h-full px-4">
+      <div class="">
+        <h1 class="font-yeseva text-5xl tracking-widest">G</h1>
+      </div>
+      <div class="flex justify-center items-center gap-4">
+        <NuxtLink class="uppercase font-josefin" active-class="font-bold" to="/">home</NuxtLink>
+        <NuxtLink class="uppercase font-josefin" active-class="font-bold" to="/albums">album</NuxtLink>
+        <NuxtLink class="uppercase font-josefin" active-class="font-bold" to="/about">about</NuxtLink>
+      </div>
+      <!-- dark mode toggle -->
+      <div class="flex justify-end">
+        <ToggleDarkMode />
+      </div>
+    </div>
+  </div>
 </template>
 
-<script setup>
-</script>
+<script setup></script>

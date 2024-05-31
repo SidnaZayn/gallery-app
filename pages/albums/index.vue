@@ -1,19 +1,20 @@
 <template>
-  <div class="w-10/12 mx-auto pt-10 h-[90vh]">
-    <div class="rounded-xl shadow-2xl p-10 h-[100%]">
+  <div class="w-10/12 mx-auto pt-12 h-[90vh] bg-white rounded-xl shadow-2xl">
+    <div class="p-10 h-[100%]">
       <div class="text-center mb-10">
         <h1 class="text-5xl font-yeseva tracking-widest">Thè Albums</h1>
       </div>
-      <div class="w-full grid grid-cols-4 gap-x-24 gap-y-20 px-10">
-        <template v-for="(album, i) in newAlbum" :key="i">
-          <AlbumCards
-            :component-id="i"
-            :cover-imgs="album.imgs"
-            :title="album.group"
-            @click="albumClick(album.group)"
-          />
-        </template>
-      </div>
+      <!-- {{ new_albums }} -->
+        <div class="w-full grid grid-cols-4 gap-x-24 gap-y-20 px-10">
+          <template v-for="(album, i) in newAlbum" :key="i">
+            <AlbumCards
+              :component-id="i"
+              :cover-imgs="album.imgs"
+              :title="album.group"
+              @click="albumClick(album.group)"
+            />
+          </template>
+        </div>
     </div>
   </div>
 </template>
@@ -23,16 +24,17 @@ const router = useRouter();
 
 const albums = import.meta.glob("../../public/albums/**/*", {
   query: "?url",
-  import:'default',
+  import: "default",
   eager: true,
 });
 
-const new_albums = Object.keys(albums).map((album) => {
-  const al = album.replace("../../public/albums/", "");
-  const group = al.split("/")[0];
-  const id = al.split("/")[1];
-  return { group: group, id: id };
-});
+const new_albums = Object.keys(albums)
+  .map((album) => {
+    const al = album.replace("../../public/albums/", "");
+    const [group, id] = al.split("/");
+    return group.split(".").length > 1 ? null : { group, id };
+  })
+  .filter(Boolean);
 
 const newAlbum = computed(() => {
   let group_args;
@@ -53,7 +55,6 @@ const newAlbum = computed(() => {
       ret.push(a);
     }
   });
-  console.log(ret);
   return ret;
 });
 

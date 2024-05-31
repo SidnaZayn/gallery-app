@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="flex justify-center items-center w-full min-h-screen bg-white">
+    <div class="flex justify-center items-center w-full min-h-screen">
       <div class="text-center">
         <h1 class="font-yeseva text-5xl tracking-widest">Galéria</h1>
         <h3 class="font-josefin m-0 mt-10 p-0">Scroll</h3>

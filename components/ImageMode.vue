@@ -1,26 +1,26 @@
 <template>
   <div
-    class="fixed bottom-[5%] left-[90%] z-10 w-fit p-3 rounded-full bg-white cursor-pointer"
+    class="fixed bottom-[5%] left-[90%] z-10 w-fit p-3 rounded-full bg-white dark:bg-slate-800 cursor-pointer"
     id="grid-mode"
     :class="{ 'drop-shadow-img-mode': modeOpen === 1 }"
     @click="toGrid()"
     title="Grid Mode"
   >
-    <span><IconsIconGrid width="2em" height="2em" color="#000" /></span>
+    <span><IconsIconGrid width="2em" height="2em" :color="iconColor" /></span>
   </div>
 
   <div
-    class="fixed bottom-[5%] left-[90%] z-10 w-fit p-3 rounded-full bg-white cursor-pointer"
+    class="fixed bottom-[5%] left-[90%] z-10 w-fit p-3 rounded-full bg-white dark:bg-slate-800 cursor-pointer"
     id="backtop-mode"
     :class="{ 'drop-shadow-img-mode': modeOpen === 1 }"
     @click="toTop()"
     title="Back To Top"
   >
-    <span><IconsIconArrowUp width="2em" height="2em" color="#000" /></span>
+    <span><IconsIconArrowUp width="2em" height="2em" :color="iconColor" /></span>
   </div>
 
   <div
-    class="fixed bottom-[5%] left-[90%] z-10 w-fit p-3 rounded-full bg-white cursor-pointer"
+    class="fixed bottom-[5%] left-[90%] z-10 w-fit p-3 rounded-full bg-white dark:bg-slate-800 cursor-pointer"
     id="zoomout-mode"
     :class="{ 'drop-shadow-img-mode': modeOpen === 1 }"
     @click="zoomInOut()"
@@ -35,16 +35,17 @@
   </div>
 
   <div
-    class="fixed bottom-[5%] left-[90%] z-10 w-fit p-3 rounded-full bg-white drop-shadow-img-mode cursor-pointer"
+    class="fixed bottom-[5%] left-[90%] z-10 w-fit p-3 rounded-full bg-white dark:bg-slate-800 drop-shadow-img-mode cursor-pointer"
     @click="openMode()"
   >
-    <span><IconsImage width="2em" height="2em" color="#000" /></span>
+    <span><IconsImage width="2em" height="2em" :color="iconColor" /></span>
   </div>
 </template>
 
 <script setup>
 import { gsap } from "gsap";
 import { useStoreIndex } from "@/stores/StoreIndex";
+const { $colorMode } = useNuxtApp();
 
 const modeOpen = ref(0);
 const storeIndex = useStoreIndex();
@@ -91,6 +92,10 @@ function toGrid() {
   tl.killTweensOf(sections);
   closeMode("grid");
 }
+
+const iconColor = computed(() => {
+  return $colorMode.value === "dark" ? "#fff" : "#000";
+});
 </script>
 
 <style>
