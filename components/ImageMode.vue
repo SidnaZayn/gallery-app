@@ -27,10 +27,10 @@
     :title="storeIndex.ImageZoomIn ? 'Zoom Out' : 'Zoom In'"
   >
     <span v-if="!storeIndex.ImageZoomIn"
-      ><IconsIconFullscreen width="2em" height="2em" color="#000"
+      ><IconsIconFullscreen width="2em" height="2em" :color="iconColor"
     /></span>
     <span v-else
-      ><IconsIconZoomOut width="2em" height="2em" color="#000"
+      ><IconsIconZoomOut width="2em" height="2em" :color="iconColor"
     /></span>
   </div>
 
@@ -87,7 +87,7 @@ function toTop() {
 }
 
 function toGrid() {
-  storeIndex.ImageZoomIn = !storeIndex.ImageZoomIn;
+  storeIndex.ImageGrid = !storeIndex.ImageGrid;
   const sections = gsap.utils.toArray(".panel");
   tl.killTweensOf(sections);
   closeMode("grid");

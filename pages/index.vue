@@ -21,7 +21,7 @@
         </span>
       </div>
     </div>
-    <div v-if="storeIndex.ImageZoomIn">
+    <div v-if="!storeIndex.ImageGrid">
       <div class="container-gsap flex min-w-max">
         <div
           v-for="(img, i) in thisAlbum"
@@ -34,14 +34,14 @@
             :src="'/albums/' + img.id"
             :alt="`${img.id}_${i}`"
             class="w-full h-full max-h-screen object-cover"
-            :class="[storeIndex.ImageZoomIn ? '' : 'shadow']"
+            :class="[storeIndex.ImageZoomIn ? '' : 'drop-shadow-img-mode rounded-xl']"
           />
           <img
             v-else
             :src="`/albums/${img.group}/${img.id}`"
             :alt="`${img.id}_${i}`"
             class="w-full h-full max-h-screen object-cover"
-            :class="[storeIndex.ImageZoomIn ? '' : 'shadow']"
+            :class="[storeIndex.ImageZoomIn ? '' : 'drop-shadow-img-mode rounded-xl']"
           />
         </div>
       </div>
@@ -54,14 +54,12 @@
             :src="'/albums/' + img.id"
             :alt="`${img.id}_${i}`"
             class="w-full h-full max-h-screen object-cover"
-            :class="[storeIndex.ImageZoomIn ? '' : 'shadow']"
           />
           <img
             v-else
             :src="`/albums/${img.group}/${img.id}`"
             :alt="`${img.id}_${i}`"
             class="w-full h-full max-h-screen object-cover"
-            :class="[storeIndex.ImageZoomIn ? '' : 'shadow']"
           />
         </div>
       </div>
@@ -82,7 +80,6 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 let sections = ref([]);
 let widthPercent = ref(500);
 const storeIndex = useStoreIndex();
-// let tl = gsap.timeline();
 
 onMounted(() => {
   sections.value = gsap.utils.toArray(".panel");
