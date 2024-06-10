@@ -1,5 +1,5 @@
 <template>
-  <div class="w-10/12 mx-auto pt-12 h-[90vh] bg-white rounded-xl shadow-2xl">
+  <div class="w-10/12 mx-auto pt-4 mt-[10rem] h-[90vh] bg-white rounded-xl shadow-2xl">
     <div class="p-10 h-[100%]">
       <div class="text-center mb-10">
         <h1 class="text-5xl font-yeseva tracking-widest">Thè Albums</h1>
@@ -25,7 +25,6 @@ const router = useRouter();
 const albums = import.meta.glob("../../public/albums/**/*", {
   query: "?url",
   import: "default",
-  eager: true,
 });
 
 const new_albums = Object.keys(albums)

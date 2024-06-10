@@ -6,13 +6,14 @@
     @mouseleave="albumBack"
   >
     <!-- {{ albumimgs }} -->
-    <img
+    <NuxtImg
       v-for="(img, i) in albumimgs"
       :src="img.img"
       alt="image"
       class="absolute rounded-lg border-2 shadow-sm w-24 object-cover max-h-16"
       :class="getImageClass(i)"
       :id="`img_${i}_${componentId}`"
+      quality="25"
     />
     <p class="mt-16 w-full font-josefin">{{ title ? title : "Albums" }}</p>
   </div>
@@ -22,8 +23,8 @@
 import gsap from "gsap";
 
 const props = defineProps({
-  coverImgs: [],
-  componentId: { type: String, required: true },
+  coverImgs: Array,
+  componentId: { type: String | Number, required: true },
   title: { type: String },
 });
 const albumimgs = computed(() => {

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <ImageMode />
     <div class="flex justify-center items-center w-full min-h-screen">
       <div class="text-center">
         <h1 class="font-yeseva text-5xl tracking-widest">Galéria</h1>

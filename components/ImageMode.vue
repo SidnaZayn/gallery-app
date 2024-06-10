@@ -3,10 +3,10 @@
     class="fixed bottom-[5%] left-[90%] z-10 w-fit p-3 rounded-full bg-white dark:bg-slate-800 cursor-pointer"
     id="grid-mode"
     :class="{ 'drop-shadow-img-mode': modeOpen === 1 }"
-    @click="closeMode('grid')"
-    title="Grid Mode"
+    @click="toAbout('grid')"
+    title="About"
   >
-    <span><IconsIconGrid width="2em" height="2em" :color="iconColor" /></span>
+    <span><IconsIconQuestionMark width="2em" height="2em" :color="iconColor" /></span>
   </div>
 
   <div
@@ -47,6 +47,7 @@ const { $colorMode } = useNuxtApp();
 
 const modeOpen = ref(0);
 const storeIndex = useStoreIndex();
+const router = useRouter();
 
 const tl = gsap.timeline();
 function openMode() {
@@ -69,6 +70,11 @@ function closeMode(mode) {
   tl.reverse();
   modeOpen.value = 2;
   return mode;
+}
+
+function toAbout(){
+  router.push('/about');
+  closeMode('grid');
 }
 
 function zoomInOut() {
