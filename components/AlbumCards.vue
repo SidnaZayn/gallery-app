@@ -24,7 +24,7 @@ import gsap from "gsap";
 
 const props = defineProps({
   coverImgs: Array,
-  componentId: { type: String | Number, required: true },
+  componentId: { required: true },
   title: { type: String },
 });
 const albumimgs = computed(() => {
