@@ -15,7 +15,7 @@
         <!-- image list -->
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
           <div class="grid gap-4 h-fit" v-for="(img, i) in thisAlbum" :key="i">
-            <img
+            <NuxtImg
               :src="`/albums/${img.group}/${img.id}`"
               :alt="`${img.group}/${img.id}`"
               :id="`${img.group}_${i}`"
