@@ -16,7 +16,9 @@
     @click="toTop()"
     title="Back To Top"
   >
-    <span><IconsIconArrowUp width="2em" height="2em" :color="iconColor" /></span>
+    <span
+      ><IconsIconArrowUp width="2em" height="2em" :color="iconColor"
+    /></span>
   </div>
 
   <div
@@ -49,6 +51,7 @@ const { $colorMode } = useNuxtApp();
 
 const modeOpen = ref(0);
 const storeIndex = useStoreIndex();
+const emit = defineEmits(["to-carousel"]);
 
 const tl = gsap.timeline();
 function openMode() {
@@ -89,8 +92,25 @@ function toTop() {
 function toGrid() {
   storeIndex.ImageGrid = !storeIndex.ImageGrid;
   const sections = gsap.utils.toArray(".panel");
-  tl.killTweensOf(sections);
-  closeMode("grid");
+
+  if (storeIndex.ImageGrid) {
+    gsap.timeline().killTweensOf(sections);
+    closeMode("grid");
+  } else {
+    emit("to-carousel");
+    closeMode("grid");
+    //   tl.to(sections, {
+    //   xPercent: -100 * (sections.length - 1),
+    //   ease: "none",
+    //   scrollTrigger: {
+    //     trigger: ".container-gsap",
+    //     pin: true,
+    //     scrub: 1,
+    //     snap: 1 / (sections.length - 1),
+    //     end: () => "+=" + document.querySelector(".container-gsap").offsetWidth,
+    //   },
+    // });
+  }
 }
 
 const iconColor = computed(() => {
