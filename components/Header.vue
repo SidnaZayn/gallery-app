@@ -7,9 +7,9 @@
         <h1 class="font-yeseva text-5xl tracking-widest">G</h1>
       </div>
       <div class="flex justify-center items-center gap-4">
-        <NuxtLink class="uppercase font-josefin" active-class="font-bold" to="/">home</NuxtLink>
-        <NuxtLink class="uppercase font-josefin" active-class="font-bold" to="/albums">album</NuxtLink>
-        <NuxtLink class="uppercase font-josefin" active-class="font-bold" to="/about">about</NuxtLink>
+        <NuxtLink class="uppercase font-josefin sm:font-sm" active-class="font-bold" to="/">home</NuxtLink>
+        <NuxtLink class="uppercase font-josefin sm:font-sm" active-class="font-bold" to="/albums">album</NuxtLink>
+        <NuxtLink class="uppercase font-josefin sm:font-sm" active-class="font-bold" to="/about">about</NuxtLink>
       </div>
       <!-- dark mode toggle -->
       <div class="flex justify-end">

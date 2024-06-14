@@ -8,7 +8,7 @@
         <NuxtImg src="/gsap-icon.png" alt="logo" class="w-32" />
       </div>
     </div>
-    <p class="w-10/12 mx-auto mt-10">
+    <p class="w-10/12 mx-auto mt-10 text-center">
       Galéria was build on Nuxt 3, Nuxt UI, and GSAP. <br />
       all images belong to their respective owners. checkout his amazing works
       <a href="https://www.pexels.com/@musaortac/">@musaortac</a> on Pexels.
@@ -18,21 +18,21 @@
         For further information and collaboration, reach me out on my socials.
       </span>
     </p>
-    <div class="flex mt-10 items-center gap-8 w-10/12 mx-auto">
+    <div class="flex justify-center items-center flex-col mt-20 gap-4 w-10/12 mx-auto">
       <h3 class="font-josefin font-bold text-4xl">Connect <br />With Me</h3>
 
       <div class="flex gap-4">
         <a href="https://github.com/sidnazayn"
-          ><IconsIconGithub width="2rem" height="2rem" color="#f8f8f8"
+          ><IconsIconGithub width="1.5rem" height="1.5rem" color="#f8f8f8"
         /></a>
-        <a href="#"
-          ><IconsIconLinkedin width="2rem" height="2rem" color="#f8f8f8"
+        <a href="https://www.linkedin.com/in/sidna-muahammad-zen-1a0898180"
+          ><IconsIconLinkedin width="1.5rem" height="1.5rem" color="#f8f8f8"
         /></a>
         <a href="https://twitter.com/talkativepeeps"
-          ><IconsIconTwitterX width="2rem" height="2rem" color="#f8f8f8"
+          ><IconsIconTwitterX width="1.5rem" height="1.5rem" color="#f8f8f8"
         /></a>
         <a href="https://www.instagram.com/zyn_daily/"
-          ><IconsIconInstagram width="2rem" height="2rem" color="#f8f8f8"
+          ><IconsIconInstagram width="1.5rem" height="1.5rem" color="#f8f8f8"
         /></a>
       </div>
     </div>
