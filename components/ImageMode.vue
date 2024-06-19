@@ -2,7 +2,7 @@
   <div
     class="fixed bottom-[5%] left-[90%] z-10 w-fit p-3 rounded-full bg-white dark:bg-slate-800 cursor-pointer"
     id="grid-mode"
-    :class="{ 'drop-shadow-img-mode': modeOpen === 1 }"
+    :class="({ 'drop-shadow-img-mode': modeOpen === 1 }, { 'left-[80%]': isMobile })"
     @click="toAbout('grid')"
     title="About"
   >
@@ -12,32 +12,29 @@
   <div
     class="fixed bottom-[5%] left-[90%] z-10 w-fit p-3 rounded-full bg-white dark:bg-slate-800 cursor-pointer"
     id="backtop-mode"
-    :class="{ 'drop-shadow-img-mode': modeOpen === 1 }"
+    :class="{ 'drop-shadow-img-mode': modeOpen === 1 }, { 'left-[80%]': isMobile }"
     @click="toTop()"
     title="Back To Top"
   >
-    <span
-      ><IconsIconArrowUp width="2em" height="2em" :color="iconColor"
-    /></span>
+    <span><IconsIconArrowUp width="2em" height="2em" :color="iconColor" /></span>
   </div>
 
   <div
     class="fixed bottom-[5%] left-[90%] z-10 w-fit p-3 rounded-full bg-white dark:bg-slate-800 cursor-pointer"
     id="zoomout-mode"
-    :class="{ 'drop-shadow-img-mode': modeOpen === 1 }"
+    :class="{ 'drop-shadow-img-mode': modeOpen === 1 }, { 'left-[80%]': isMobile }"
     @click="zoomInOut()"
     :title="storeIndex.ImageZoomIn ? 'Zoom Out' : 'Zoom In'"
   >
     <span v-if="!storeIndex.ImageZoomIn"
       ><IconsIconFullscreen width="2em" height="2em" :color="iconColor"
     /></span>
-    <span v-else
-      ><IconsIconZoomOut width="2em" height="2em" :color="iconColor"
-    /></span>
+    <span v-else><IconsIconZoomOut width="2em" height="2em" :color="iconColor" /></span>
   </div>
 
   <div
     class="fixed bottom-[5%] left-[90%] z-10 w-fit p-3 rounded-full bg-white dark:bg-slate-800 drop-shadow-img-mode cursor-pointer"
+    :class="({ 'left-[80%]': isMobile })"
     @click="openMode()"
   >
     <span><IconsImage width="2em" height="2em" :color="iconColor" /></span>
@@ -47,12 +44,16 @@
 <script setup>
 import { gsap } from "gsap";
 import { useStoreIndex } from "@/stores/StoreIndex";
+import { useWindowSize } from "@vueuse/core";
 const { $colorMode } = useNuxtApp();
 
 const modeOpen = ref(0);
 const storeIndex = useStoreIndex();
 const router = useRouter();
 const emit = defineEmits(["to-carousel"]);
+const { width } = useWindowSize();
+
+const isMobile = computed(() => width.value < 768);
 
 const tl = gsap.timeline();
 function openMode() {
@@ -77,9 +78,9 @@ function closeMode(mode) {
   return mode;
 }
 
-function toAbout(){
-  router.push('/about');
-  closeMode('grid');
+function toAbout() {
+  router.push("/about");
+  closeMode("grid");
 }
 
 function zoomInOut() {

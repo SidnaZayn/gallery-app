@@ -3,13 +3,14 @@
     class="flex hover:cursor-pointer w-min-[300px] h-fit shadow-sm"
     @mouseover="albumHover"
     @mouseleave="albumBack"
-    >
+  >
     <NuxtImg
       v-for="(img, i) in albumimgs"
       :src="img.img"
       alt="image"
       class="absolute rounded-lg border-2 shadow-sm w-24 object-cover max-h-16 transition-all"
       :class="`translate-x-${i * translateVal}`"
+      :style="{ 'z-index': 4 - i }"
       quality="25"
     />
     <p class="mt-16 w-full font-josefin">{{ title ? title : "Albums" }}</p>
@@ -40,25 +41,21 @@ const albumHover = () => {
 };
 
 const albumBack = () => {
-  translateVal.value = 0
+  translateVal.value = 0;
 };
 </script>
 
 <style>
-.translate-x-0{
-transform: translateX(0);
-z-index: 4;
+.translate-x-0 {
+  transform: translateX(0);
 }
-.translate-x-4{
-transform: translateX(1rem);
-z-index: 3;
+.translate-x-4 {
+  transform: translateX(1rem);
 }
-.translate-x-8{
-transform: translateX(2rem);
-z-index: 2;
+.translate-x-8 {
+  transform: translateX(2rem);
 }
-.translate-x-12{
-transform: translateX(3rem);
-z-index: 1;
+.translate-x-12 {
+  transform: translateX(3rem);
 }
 </style>

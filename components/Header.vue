@@ -1,6 +1,7 @@
 <template>
   <div
     class="w-10/12 rounded-xl shadow-2xl h-[10vh] bg-white dark:bg-slate-800 fixed top-8 left-1/2 translate-x-[-50%] z-[100]"
+    :class="isMobile ? 'hidden' : 'block'"
   >
     <div class="grid grid-cols-3 justify-between items-center h-full px-4">
       <div class="">
@@ -17,6 +18,15 @@
       </div>
     </div>
   </div>
+  <div v-if="isMobile" class="fixed top-4 left-[80%]">
+    <MobileHeader />
+  </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { useWindowSize } from "@vueuse/core";
+
+const { width } = useWindowSize();
+
+const isMobile = computed(() => width.value < 768);
+</script>
