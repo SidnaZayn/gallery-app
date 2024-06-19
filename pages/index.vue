@@ -22,29 +22,54 @@
         </span>
       </div>
     </div>
-    <div class="container-gsap flex min-w-max">
-      <div
-        v-for="(img, i) in thisAlbum"
-        :key="i"
-        class="panel w-screen h-screen"
-        id="img-panel"
-      >
-        <img
-          v-if="!img.group"
-          :src="'/albums/' + img.id"
-          :alt="`${img.id}_${i}`"
-          class="w-full h-full max-h-screen object-cover"
-          :class="[storeIndex.ImageZoomIn? '':'shadow']"
-        />
-        <img
-          v-else
-          :src="`/albums/${img.group}/${img.id}`"
-          :alt="`${img.id}_${i}`"
-          class="w-full h-full max-h-screen object-cover"
-          :class="[storeIndex.ImageZoomIn? '':'shadow']"
-        />
+    <div v-if="!storeIndex.ImageGrid">
+      <div class="container-gsap flex min-w-max">
+        <div
+          v-for="(img, i) in thisAlbum"
+          :key="i"
+          class="panel w-screen h-screen"
+          id="img-panel"
+        >
+          <img
+            v-if="!img.group"
+            :src="'/albums/' + img.id"
+            :alt="`${img.id}_${i}`"
+            class="w-full h-full max-h-screen object-cover"
+            :class="[
+              storeIndex.ImageZoomIn ? '' : 'drop-shadow-img-mode rounded-xl',
+            ]"
+          />
+          <img
+            v-else
+            :src="`/albums/${img.group}/${img.id}`"
+            :alt="`${img.id}_${i}`"
+            class="w-full h-full max-h-screen object-cover"
+            :class="[
+              storeIndex.ImageZoomIn ? '' : 'drop-shadow-img-mode rounded-xl',
+            ]"
+          />
+        </div>
       </div>
     </div>
+    <div v-else>
+      <div class="grid grid-cols-4 container-gsap">
+        <div v-for="(img, i) in thisAlbum" :key="i" class="h-full w-full">
+          <img
+            v-if="!img.group"
+            :src="'/albums/' + img.id"
+            :alt="`${img.id}_${i}`"
+            class="w-full h-full max-h-screen object-cover"
+          />
+          <img
+            v-else
+            :src="`/albums/${img.group}/${img.id}`"
+            :alt="`${img.id}_${i}`"
+            class="w-full h-full max-h-screen object-cover"
+          />
+        </div>
+      </div>
+    </div>
+    <ImageMode v-on:to-carousel="toCarousel" />
   </div>
 </template>
 
@@ -59,13 +84,25 @@ import { useStoreIndex } from "@/stores/StoreIndex";
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 let sections = ref([]);
-let widthPercent = ref(500);
 const storeIndex = useStoreIndex();
+
+function toCarousel() {
+  gsap.to(sections.value, {
+    xPercent: -100 * (sections.value.length - 1),
+    ease: "none",
+    scrollTrigger: {
+      trigger: ".container-gsap",
+      pin: true,
+      scrub: 1,
+      snap: 1 / (sections.value.length - 1),
+      end: () => "+=" + document.querySelector(".container-gsap").offsetWidth,
+    },
+  });
+}
 
 onMounted(() => {
   sections.value = gsap.utils.toArray(".panel");
-  widthPercent.value = (sections.value.length + 1) * 100;
-
+  // toCarousel;
   gsap.to(sections.value, {
     xPercent: -100 * (sections.value.length - 1),
     ease: "none",

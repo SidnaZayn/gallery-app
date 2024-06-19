@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex hover:cursor-pointer w-min h-fit shadow-sm"
+    class="flex hover:cursor-pointer w-min-[300px] h-fit shadow-sm"
     @mouseover="albumHover"
     @mouseleave="albumBack"
     >
@@ -23,7 +23,7 @@ const props = defineProps({
   title: { type: String },
 });
 
-const translateVal = ref(4);
+const translateVal = ref(0);
 
 const albumimgs = computed(() => {
   const ret = [];
@@ -36,10 +36,29 @@ const albumimgs = computed(() => {
 });
 
 const albumHover = () => {
-  translateVal.value = 8;
+  translateVal.value = 4;
 };
 
 const albumBack = () => {
-  translateVal.value = 4
+  translateVal.value = 0
 };
 </script>
+
+<style>
+.translate-x-0{
+transform: translateX(0);
+z-index: 4;
+}
+.translate-x-4{
+transform: translateX(1rem);
+z-index: 3;
+}
+.translate-x-8{
+transform: translateX(2rem);
+z-index: 2;
+}
+.translate-x-12{
+transform: translateX(3rem);
+z-index: 1;
+}
+</style>

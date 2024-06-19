@@ -3,7 +3,9 @@
     <IconsIconMoon
       v-if="$colorMode.preference !== 'dark'"
       @click="toggleDarkMode"
-      class="cursor-pointer toggle"
+      id="to-dark"
+      class="cursor-pointer"
+      :class="[onRotate ? 'animate-spin' : '']"
       color="#000"
       width="1.5em"
       height="1.5em"
@@ -12,7 +14,9 @@
     <IconsIconSun
       v-else
       @click="toggleDarkMode"
-      class="cursor-pointer toggle"
+      id="to-light"
+      class="cursor-pointer"
+      :class="[onRotate ? 'animate-spin' : '']"
       color="#fff"
       width="1.5em"
       height="1.5em"
@@ -23,25 +27,10 @@
 <script setup>
 import gsap from "gsap";
 const { $colorMode } = useNuxtApp();
-const toggleAnim = ref();
-const toggleAnimCount = ref(0);
+const onRotate = ref(false);
 
 const toggleDarkMode = () => {
-  if (toggleAnimCount.value === 0) {
-    toggleAnim.value = gsap.timeline().to(
-      ".toggle",
-      {
-        rotate: 360,
-        duration: 0.5,
-      },
-      0
-    );
-    toggleAnimCount.value = 1;
-  } else {
-    toggleAnim.value.reverse();
-    toggleAnimCount.value = 0;
-  }
-
+  onRotate.value = true;
   if ($colorMode.preference === "system") {
     $colorMode.preference = "dark";
   } else if ($colorMode.preference === "dark") {
@@ -49,5 +38,9 @@ const toggleDarkMode = () => {
   } else {
     $colorMode.preference = "dark";
   }
+  const timeout = $colorMode.preference === "dark" ? 500 : 1000;
+  setTimeout(() => {
+    onRotate.value = false;
+  }, timeout);
 };
 </script>
