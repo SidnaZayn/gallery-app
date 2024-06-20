@@ -1,18 +1,18 @@
 <template>
   <div class="w-10/12 mx-auto pt-4 mt-[10rem] h-[90vh] bg-white dark:bg-slate-800 rounded-xl shadow-2xl">
-    <div class="p-10 h-[100%]">
+    <div class="p-6 md:p-10 h-[100%]">
       <div class="text-center mb-10">
         <h1 class="text-5xl font-yeseva tracking-widest">Thè Albums</h1>
       </div>
       <!-- {{ new_albums }} -->
-      <div class="w-full grid grid-cols-4 gap-x-24 gap-y-20 px-10">
+      <div class="w-full grid gap-x-24 gap-y-20 justify-center items-center" :class="isMobile ? 'grid-cols-2' : 'grid-cols-4'">
         <template v-for="(album, i) in newAlbum" :key="i">
           <AlbumCards
             :component-id="i"
             :cover-imgs="album.imgs"
             :title="album.group"
             @click="albumClick(album.group)"
-          />
+          ></AlbumCards>
         </template>
       </div>
     </div>
@@ -20,7 +20,11 @@
 </template>
 
 <script setup>
+import { useWindowSize } from "@vueuse/core";
+
+const { width } = useWindowSize();
 const router = useRouter();
+const isMobile = computed(() => width.value < 768);
 
 const albums = import.meta.glob("../../public/albums/**/*", {
   query: "?url",
