@@ -18,7 +18,7 @@
       </div>
     </div>
   </div>
-  <div v-if="isMobile" class="fixed top-4 left-[80%]">
+  <div v-if="isMobile" class="fixed top-4 left-[80%] z-[100]">
     <MobileHeader />
   </div>
 </template>

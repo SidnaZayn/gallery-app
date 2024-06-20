@@ -1,8 +1,8 @@
 <template>
   <div
-    class="fixed bottom-[5%] left-[90%] z-10 w-fit p-3 rounded-full bg-white dark:bg-slate-800 cursor-pointer"
+    class="fixed bottom-[5%] z-10 w-fit p-3 rounded-full bg-white dark:bg-slate-800 cursor-pointer"
     id="grid-mode"
-    :class="({ 'drop-shadow-img-mode': modeOpen === 1 }, { 'left-[80%]': isMobile })"
+    :class="[{ 'drop-shadow-img-mode': modeOpen === 1 }, isMobile ? 'left-[80%]' : 'left-[90%]']"
     @click="toAbout('grid')"
     title="About"
   >
@@ -10,9 +10,9 @@
   </div>
 
   <div
-    class="fixed bottom-[5%] left-[90%] z-10 w-fit p-3 rounded-full bg-white dark:bg-slate-800 cursor-pointer"
+    class="fixed bottom-[5%] z-10 w-fit p-3 rounded-full bg-white dark:bg-slate-800 cursor-pointer"
     id="backtop-mode"
-    :class="{ 'drop-shadow-img-mode': modeOpen === 1 }, { 'left-[80%]': isMobile }"
+    :class="[{ 'drop-shadow-img-mode': modeOpen === 1 }, isMobile ? 'left-[80%]' : 'left-[90%]']"
     @click="toTop()"
     title="Back To Top"
   >
@@ -20,9 +20,9 @@
   </div>
 
   <div
-    class="fixed bottom-[5%] left-[90%] z-10 w-fit p-3 rounded-full bg-white dark:bg-slate-800 cursor-pointer"
+    class="fixed bottom-[5%] z-10 w-fit p-3 rounded-full bg-white dark:bg-slate-800 cursor-pointer"
     id="zoomout-mode"
-    :class="{ 'drop-shadow-img-mode': modeOpen === 1 }, { 'left-[80%]': isMobile }"
+    :class="[{ 'drop-shadow-img-mode': modeOpen === 1 }, isMobile ? 'left-[80%]' : 'left-[90%]']"
     @click="zoomInOut()"
     :title="storeIndex.ImageZoomIn ? 'Zoom Out' : 'Zoom In'"
   >
@@ -33,8 +33,8 @@
   </div>
 
   <div
-    class="fixed bottom-[5%] left-[90%] z-10 w-fit p-3 rounded-full bg-white dark:bg-slate-800 drop-shadow-img-mode cursor-pointer"
-    :class="({ 'left-[80%]': isMobile })"
+    class="fixed bottom-[5%] z-10 w-fit p-3 rounded-full bg-white dark:bg-slate-800 drop-shadow-img-mode cursor-pointer"
+    :class="[isMobile ? 'left-[80%]' : 'left-[90%]']"
     @click="openMode()"
   >
     <span><IconsImage width="2em" height="2em" :color="iconColor" /></span>
@@ -94,30 +94,6 @@ function zoomInOut() {
 function toTop() {
   window.scrollTo({ top: 0, behavior: "smooth" });
   closeMode("grid");
-}
-
-function toGrid() {
-  storeIndex.ImageGrid = !storeIndex.ImageGrid;
-  const sections = gsap.utils.toArray(".panel");
-
-  if (storeIndex.ImageGrid) {
-    gsap.timeline().killTweensOf(sections);
-    closeMode("grid");
-  } else {
-    emit("to-carousel");
-    closeMode("grid");
-    //   tl.to(sections, {
-    //   xPercent: -100 * (sections.length - 1),
-    //   ease: "none",
-    //   scrollTrigger: {
-    //     trigger: ".container-gsap",
-    //     pin: true,
-    //     scrub: 1,
-    //     snap: 1 / (sections.length - 1),
-    //     end: () => "+=" + document.querySelector(".container-gsap").offsetWidth,
-    //   },
-    // });
-  }
 }
 
 const iconColor = computed(() => {
