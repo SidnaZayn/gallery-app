@@ -1,11 +1,17 @@
 <template>
   <div
-    class="mobile-head rounded-full py-4 px-1 bg-slate-800 w-fit h-fit shadow-2xl flex flex-col justify-center items-center gap-12"
+    class="grid grid-cols-1 gap-12 mobile-head rounded-full bg-slate-800 w-[4rem] min-h-[4rem] py-4 shadow-2xl"
   >
-    <div class="">
-      <h1 class="font-yeseva text-2xl">G</h1>
-    </div>
-    <div class="flex flex-col justify-center items-center gap-12">
+    <button @click="openMenu()" class="flex justify-center items-center">
+      <IconsIconMenu
+        width="2rem"
+        height="2rem"
+        :color="iconColor"
+        class="transition-all"
+        :class="{ 'rotate-90': menuExpand }"
+      />
+    </button>
+    <div v-if="menuExpand" class="flex flex-col gap-12 mx-auto items-center justify-center pr-1">
       <NuxtLink class="uppercase rotate-90 font-josefin sm:font-sm" active-class="font-bold" to="/"
         >home</NuxtLink
       >
@@ -21,9 +27,9 @@
         to="/about"
         >about</NuxtLink
       >
-    </div>
-    <div class="flex justify-end rotate-90">
-      <ToggleDarkMode />
+      <div class="flex justify-center rotate-90">
+        <ToggleDarkMode />
+      </div>
     </div>
   </div>
 </template>
@@ -33,6 +39,12 @@ const { $colorMode } = useNuxtApp();
 const iconColor = computed(() => {
   return $colorMode.value === "dark" ? "#fff" : "#000";
 });
+
+const menuExpand = ref(false);
+
+const openMenu = () => {
+  menuExpand.value = !menuExpand.value;
+};
 </script>
 
 <style>
