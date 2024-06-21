@@ -10,4 +10,11 @@ export default defineNuxtConfig({
     "@nuxt/image"
   ],
   css:["~/assets/style.css"],
+  app:{
+    head:{
+      link:[
+        {rel:"icon",type:"image/x-icon",href:"/app-icon.png"}
+      ]
+    }
+  }
 })
