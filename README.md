@@ -37,3 +37,7 @@ https://fonts.google.com/share?selection.family=Josefin+Sans|Yeseva+One
 
 # Images Credits:
 Musa Ortac : https://www.pexels.com/@musaortac/
+
+# Todo
+- optimizing images
+- add all images and filters
