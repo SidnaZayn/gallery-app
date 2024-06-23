@@ -41,3 +41,4 @@ Musa Ortac : https://www.pexels.com/@musaortac/
 # Todo
 - optimizing images
 - add all images and filters
+- add meta data
