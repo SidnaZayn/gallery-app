@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="flex justify-center items-center w-full min-h-screen bg-white">
-      <div class="text-center">
+    <div class="flex justify-center items-center min-h-screen">
+      <div class="text-center z-20">
         <h1 class="font-yeseva text-5xl tracking-widest">Galéria</h1>
         <h3 class="font-josefin m-0 mt-10 p-0">Scroll</h3>
         <span class="mx-auto inline">
@@ -19,6 +19,14 @@
             />
           </svg>
         </span>
+      </div>
+      <div class="absolute inset-0 z-10 w-full h-full bg-white dark:bg-slate-800 bg-opacity-50 dark:bg-opacity-50"></div>
+      <div class="absolute z-0 inset-0 overflow-hidden h-full">
+        <div class="z-0 inset-0">
+          <video height="1000" width="100%" autoplay loop class="w-full h-full object-cover">
+            <source src="/hero-images/hero-vid-f.mp4" type="video/mp4"/>
+          </video>
+        </div>
       </div>
     </div>
     <div class="min-w-max">

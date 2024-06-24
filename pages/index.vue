@@ -69,7 +69,6 @@
         </div>
       </div>
     </div>
-    <ImageMode v-on:to-carousel="toCarousel" />
   </div>
 </template>
 
