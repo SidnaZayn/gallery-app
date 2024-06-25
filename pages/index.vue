@@ -21,10 +21,14 @@
           </svg>
         </span>
       </div>
-      <div class="absolute inset-0 z-10 w-full h-full bg-white dark:bg-slate-800 bg-opacity-50 dark:bg-opacity-50"></div>
-      <div class="absolute z-0 inset-0 overflow-hidden h-full">
-        <div class="z-0 inset-0">
+      <div
+        class="absolute inset-0 z-10 w-full h-full bg-white dark:bg-slate-800 bg-opacity-50 dark:bg-opacity-50"
+      ></div>
+      <div class="absolute z-0 inset-0 h-full">
+        <div class="z-0 inset-0 h-full w-full">
+          <img v-if="width < 768" src="/hero-images/on-mobilepng.png" alt="img-bg-mobile" class="w-full h-full object-cover" />
           <video
+            v-else
             src="/hero-images/hero-vid-f.mp4"
             height="1000"
             width="100%"
@@ -87,11 +91,14 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { onMounted } from "vue";
 import { useStoreIndex } from "@/stores/StoreIndex";
+import { useWindowSize } from "@vueuse/core";
+
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 let sections = ref([]);
 const storeIndex = useStoreIndex();
 const { $colorMode } = useNuxtApp();
+const { width } = useWindowSize();
 
 onMounted(() => {
   sections.value = gsap.utils.toArray(".panel");
@@ -137,24 +144,20 @@ const thisAlbum = computed(() => {
   --s: 20px; /* control the size*/
   --c1: #ffffff;
   --c2: #1f2a38;
-  
-  --_g: var(--c1) 90deg,#0000 90.5deg;
-  background:
-   conic-gradient(from -45deg,var(--_g)),
-   conic-gradient(from 135deg,var(--_g)) calc(var(--s)/2) 0,
-   var(--c2);
-  background-size: var(--s) var(--s)
+
+  --_g: var(--c1) 90deg, #0000 90.5deg;
+  background: conic-gradient(from -45deg, var(--_g)),
+    conic-gradient(from 135deg, var(--_g)) calc(var(--s) / 2) 0, var(--c2);
+  background-size: var(--s) var(--s);
 }
 .dark-spacer-pattern {
   --s: 20px; /* control the size*/
-  --c1: #1E293B;
+  --c1: #1e293b;
   --c2: #3a6961;
-  
-  --_g: var(--c1) 90deg,#0000 90.5deg;
-  background:
-   conic-gradient(from -45deg,var(--_g)),
-   conic-gradient(from 135deg,var(--_g)) calc(var(--s)/2) 0,
-   var(--c2);
-  background-size: var(--s) var(--s)
+
+  --_g: var(--c1) 90deg, #0000 90.5deg;
+  background: conic-gradient(from -45deg, var(--_g)),
+    conic-gradient(from 135deg, var(--_g)) calc(var(--s) / 2) 0, var(--c2);
+  background-size: var(--s) var(--s);
 }
 </style>
