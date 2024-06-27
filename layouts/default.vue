@@ -9,5 +9,8 @@
 <script setup>
 useSeoMeta({
   title: "Galéria - Gallery App",
+  ogImage: "https://galeria-zyn.netlify.app/mockup.png",
+  ogUrl: "https://galeria-zyn.netlify.app",
+  ogDescription: "easy use gallery app",
 })
 </script>
