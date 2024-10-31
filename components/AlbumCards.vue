@@ -11,7 +11,6 @@
       class="absolute rounded-lg border-2 shadow-sm w-24 object-cover max-h-16 transition-all"
       :class="`translate-x-${i * translateVal}`"
       :style="{ 'z-index': 4 - i }"
-      quality="25"
     />
     <p class="mt-16 w-full font-josefin">{{ title ? title : "Albums" }}</p>
   </div>

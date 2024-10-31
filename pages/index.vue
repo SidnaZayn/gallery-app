@@ -26,16 +26,23 @@
       ></div>
       <div class="absolute z-0 inset-0 h-full">
         <div class="z-0 inset-0 h-full w-full">
-          <img v-if="width < 768" src="/hero-images/on-mobilepng.png" alt="img-bg-mobile" class="w-full h-full object-cover" />
+          <img
+            v-if="width < 768"
+            src="/hero-images/on-mobilepng.png"
+            alt="img-bg-mobile"
+            class="w-full h-full object-none object-top"
+          />
           <video
             v-else
-            src="/hero-images/hero-vid-f.mp4"
             height="1000"
             width="100%"
             autoplay
             loop
+            muted
             class="w-full h-full object-cover"
-          ></video>
+          >
+            <source src="/hero-images/hero-vid-f-1.mp4" type="video/mp4" />
+          </video>
         </div>
       </div>
       <div class="absolute z-30 w-full h-auto bg-white dark:bg-slate-800 bottom-0 py-4">
@@ -85,13 +92,19 @@
 </template>
 
 <script setup>
-import { gsap } from "gsap";
+import { gsap } from 'gsap';
 
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-import { onMounted } from "vue";
-import { useStoreIndex } from "@/stores/StoreIndex";
-import { useWindowSize } from "@vueuse/core";
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
+import { onMounted } from 'vue';
+import { useStoreIndex } from '@/stores/StoreIndex';
+import { useWindowSize } from '@vueuse/core';
+
+import transitionConfig from '../helpers/transitionConfig';
+
+definePageMeta({
+  pageTransition: transitionConfig,
+});
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
@@ -101,37 +114,37 @@ const { $colorMode } = useNuxtApp();
 const { width } = useWindowSize();
 
 onMounted(() => {
-  sections.value = gsap.utils.toArray(".panel");
+  sections.value = gsap.utils.toArray('.panel');
   // toCarousel;
   gsap.to(sections.value, {
     xPercent: -100 * (sections.value.length - 1),
-    ease: "none",
+    ease: 'none',
     scrollTrigger: {
-      trigger: ".container-gsap",
+      trigger: '.container-gsap',
       pin: true,
       scrub: 1,
       snap: 1 / (sections.value.length - 1),
-      end: () => "+=" + document.querySelector(".container-gsap").offsetWidth,
+      end: () => '+=' + document.querySelector('.container-gsap').offsetWidth,
     },
   });
 });
 
-const imgs_ = import.meta.glob("../public/albums/**/*", {
-  query: "?url",
-  import: "default",
+const imgs_ = import.meta.glob('../public/albums/**/*', {
+  query: '?url',
+  import: 'default',
   eager: true,
 });
 
 const thisAlbum = computed(() => {
   const ret = [];
   Object.keys(imgs_).forEach((album, i) => {
-    const al = album.replace("../public/albums/", "");
-    const group = al.split("/")[0];
+    const al = album.replace('../public/albums/', '');
+    const group = al.split('/')[0];
     //check if last 4 letters are ".jpg" or ".png" or ".jpeg"
-    if (group.split(".").length > 1) {
+    if (group.split('.').length > 1) {
       ret.push({ id: group, group: false });
     } else {
-      const id = al.split("/")[1];
+      const id = al.split('/')[1];
       ret.push({ id: id, group: group });
     }
   });
