@@ -18,7 +18,7 @@
         For further information and collaboration, reach me out on my socials.
       </span>
     </p>
-    <div class="flex justify-center items-center flex-col mt-20 gap-4 w-10/12 mx-auto" id="socials">
+    <div class="flex justify-center items-center flex-col mt-20 gap-4 w-10/12 mx-auto opacity-0" id="socials">
       <h3 class="font-josefin font-bold text-4xl">Connect <br />With Me</h3>
 
       <div class="flex gap-4">
