@@ -2,6 +2,7 @@
 export default defineNuxtConfig({
   devtools: { enabled: false },
   ssr: false,
+
   modules: [
     "@nuxt/ui",
     "@nuxtjs/tailwindcss",
@@ -9,7 +10,9 @@ export default defineNuxtConfig({
     "@vueuse/nuxt",
     "@nuxt/image",
   ],
+
   css: ["~/assets/style.css"],
+
   app: {
     head: {
       title:'Galéria - Gallery App',
@@ -33,4 +36,6 @@ export default defineNuxtConfig({
       link: [{ rel: "icon", type: "image/x-icon", href: "/app-icon.png" }],
     },
   },
+
+  compatibilityDate: "2025-03-22",
 });

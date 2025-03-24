@@ -6,41 +6,19 @@
         <h1 class="font-yeseva text-5xl tracking-widest">Galéria</h1>
         <h3 class="font-josefin m-0 mt-10 p-0">Scroll</h3>
         <span class="mx-auto inline">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="1em"
-            height="1em"
-            viewBox="0 0 24 24"
-            style="display: inline"
-            class="animate-bounce"
-          >
-            <path
-              fill="#bf1d1d"
-              d="m12 13.171l4.95-4.95l1.414 1.415L12 16L5.636 9.636L7.05 8.222z"
-            />
+          <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" style="display: inline"
+            class="animate-bounce">
+            <path fill="#bf1d1d" d="m12 13.171l4.95-4.95l1.414 1.415L12 16L5.636 9.636L7.05 8.222z" />
           </svg>
         </span>
       </div>
-      <div
-        class="absolute inset-0 z-10 w-full h-full bg-white dark:bg-slate-800 bg-opacity-50 dark:bg-opacity-50"
-      ></div>
+      <div class="absolute inset-0 z-10 w-full h-full bg-white dark:bg-slate-800 bg-opacity-50 dark:bg-opacity-50">
+      </div>
       <div class="absolute z-0 inset-0 h-full">
         <div class="z-0 inset-0 h-full w-full">
-          <img
-            v-if="width < 768"
-            src="/hero-images/on-mobilepng.png"
-            alt="img-bg-mobile"
-            class="w-full h-full object-none object-top"
-          />
-          <video
-            v-else
-            height="1000"
-            width="100%"
-            autoplay
-            loop
-            muted
-            class="w-full h-full object-cover"
-          >
+          <img v-if="width < 768" src="/hero-images/on-mobilepng.png" alt="img-bg-mobile"
+            class="w-full h-full object-none object-top" />
+          <video v-else height="1000" width="100%" autoplay loop muted class="w-full h-full object-cover">
             <source src="/hero-images/hero-vid-f-1.mp4" type="video/mp4" />
           </video>
         </div>
@@ -50,42 +28,17 @@
         <div v-else class="spacer-pattern h-[40px]"></div>
       </div>
     </div>
-    <div v-if="!storeIndex.ImageGrid">
+    <div>
       <div class="container-gsap flex min-w-max">
-        <div v-for="(img, i) in thisAlbum" :key="i" class="panel w-screen h-screen" id="img-panel">
-          <img
-            v-if="!img.group"
-            :src="'/albums/' + img.id"
-            :alt="`${img.id}_${i}`"
-            class="w-full h-full max-h-screen object-cover"
-            :class="[storeIndex.ImageZoomIn ? '' : 'drop-shadow-img-mode rounded-xl']"
-          />
-          <img
-            v-else
-            :src="`/albums/${img.group}/${img.id}`"
-            :alt="`${img.id}_${i}`"
-            class="w-full h-full max-h-screen object-cover"
-            :class="[storeIndex.ImageZoomIn ? '' : 'drop-shadow-img-mode rounded-xl']"
-          />
-        </div>
-      </div>
-    </div>
-    <div v-else>
-      <div class="grid grid-cols-4 container-gsap">
-        <div v-for="(img, i) in thisAlbum" :key="i" class="h-full w-full">
-          <img
-            v-if="!img.group"
-            :src="'/albums/' + img.id"
-            :alt="`${img.id}_${i}`"
-            class="w-full h-full max-h-screen object-cover"
-          />
-          <img
-            v-else
-            :src="`/albums/${img.group}/${img.id}`"
-            :alt="`${img.id}_${i}`"
-            class="w-full h-full max-h-screen object-cover"
-          />
-        </div>
+        <template v-for="(img, i) in albums" :key="i">
+
+          <div v-for="(j) in 4" :key="j" class="panel w-screen h-screen" id="img-panel">
+            <AdvancedImage :plugins="cloudinary.plugins"
+              :cld-img="cloudinary.createImageInstance(`Galeria/${img}/${img}_${j + 1}`)"
+              class="w-full h-full max-h-screen object-cover"
+              :class="[storeIndex.ImageZoomIn ? '' : 'drop-shadow-img-mode rounded-xl']" />
+          </div>
+        </template>
       </div>
     </div>
   </div>
@@ -93,7 +46,7 @@
 
 <script setup>
 import { gsap } from 'gsap';
-
+import { AdvancedImage } from "@cloudinary/vue";
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import { onMounted } from 'vue';
@@ -101,6 +54,9 @@ import { useStoreIndex } from '@/stores/StoreIndex';
 import { useWindowSize } from '@vueuse/core';
 
 import transitionConfig from '../helpers/transitionConfig';
+
+const cloudinary = useCloudinary();
+const albums = ['balloons', 'buildings', 'horses', 'warm']
 
 definePageMeta({
   pageTransition: transitionConfig,
@@ -154,7 +110,8 @@ const thisAlbum = computed(() => {
 
 <style>
 .spacer-pattern {
-  --s: 20px; /* control the size*/
+  --s: 20px;
+  /* control the size*/
   --c1: #ffffff;
   --c2: #1f2a38;
 
@@ -163,8 +120,10 @@ const thisAlbum = computed(() => {
     conic-gradient(from 135deg, var(--_g)) calc(var(--s) / 2) 0, var(--c2);
   background-size: var(--s) var(--s);
 }
+
 .dark-spacer-pattern {
-  --s: 20px; /* control the size*/
+  --s: 20px;
+  /* control the size*/
   --c1: #1e293b;
   --c2: #3a6961;
 
