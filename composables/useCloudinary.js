@@ -22,8 +22,15 @@ export const useCloudinary = () => {
     return image;
   };
 
+  const createMiniImage = (publicId) => {
+    const image = createImageInstance(publicId);
+    image.resize("w_100", "h_100");
+    return image;
+  }
+
   return {
     createImageInstance,
+    createMiniImage,
     createVideoInstance,
     cloudinary,
     plugins,
