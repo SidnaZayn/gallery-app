@@ -58,9 +58,9 @@
     <div>
       <div class="container-gsap flex min-w-max">
         <template v-if="imageInstances.length > 0">
-          <div class="panel w-screen h-screen" id="img-panel" v-for="(img, i) in imageInstances" :key="i">
+          <div class="panel w-screen h-screen" id="img-panel" v-for="(img, i) in albums" :key="i">
             <NuxtImg
-              :src="img"
+              :src="`https://res.cloudinary.com/dqyh4h3oi/image/upload/f_auto/v1/Galeria/${img}/${img}_1`"
               alt="image"
               class="w-full h-full max-h-screen object-cover"
               :class="[

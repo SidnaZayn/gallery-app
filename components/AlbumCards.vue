@@ -7,7 +7,7 @@
   >
     <NuxtImg
       v-for="(img, i) in imgsDisplay"
-      :src="img"
+      :src="`https://res.cloudinary.com/dqyh4h3oi/image/upload/f_auto/w_100/v1/Galeria/${props.title}/${props.title}_${i+1}`"
       alt="image"
       class="absolute rounded-lg border-2 shadow-sm w-24 object-cover max-h-16 transition-all"
       :class="`translate-x-${i * translateVal}`"
@@ -31,7 +31,7 @@ const translateVal = ref(0);
 
 const imgsDisplay = computed(() => {
   return props.coverImgs.map((img, i) => {
-    return cloudinary.createMiniImage(img.img).toURL();
+    return cloudinary.createMiniImage(img).toURL();
   });
 });
 
