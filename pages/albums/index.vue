@@ -17,7 +17,6 @@
               :component-id="i"
               :cover-imgs="album.imgs"
               :title="album.group"
-              :cloudinaryURL="album.imgs.map((img) => img.img)"
               @click="albumClick(album.group)"
             ></AlbumCards>
           </template>

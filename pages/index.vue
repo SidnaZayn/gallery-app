@@ -58,9 +58,14 @@
     <div>
       <div class="container-gsap flex min-w-max">
         <template v-if="imageInstances.length > 0">
-          <div class="panel w-screen h-screen" id="img-panel" v-for="(img, i) in albums" :key="i">
+          <div
+            class="panel w-screen h-screen"
+            id="img-panel"
+            v-for="(img, i) in imageInstances"
+            :key="i"
+          >
             <NuxtImg
-              :src="`https://res.cloudinary.com/dqyh4h3oi/image/upload/f_auto/v1/Galeria/${img}/${img}_1`"
+              :src="`${img}`"
               alt="image"
               class="w-full h-full max-h-screen object-cover"
               :class="[
@@ -92,7 +97,7 @@ const imageInstances = computed(() => {
   albums.forEach((album) => {
     for (let i = 1; i <= 4; i++) {
       ret.push(
-        cloudinary.createImageInstance(`Galeria/${album}/${album}_${i}`).toURL()
+        cloudinary.createImageInstance(`Galeria/${album}/${album}_${i}`)
       );
     }
   });

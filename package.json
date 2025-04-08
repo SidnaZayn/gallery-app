@@ -10,11 +10,10 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@cloudinary/url-gen": "^1.21.0",
-    "@cloudinary/vue": "^1.13.1",
     "@nuxt/image": "^1.7.0",
     "@nuxt/ui": "^2.15.2",
     "@pinia/nuxt": "^0.5.1",
+    "cloudinary-build-url": "^0.2.4",
     "gsap": "^3.12.5",
     "nuxt": "^3.11.2",
     "pinia": "^2.1.7",
@@ -22,6 +21,7 @@
     "vue-router": "^4.3.0"
   },
   "devDependencies": {
+    "@cld-apis/types": "^0.1.6",
     "@vueuse/core": "^10.10.0",
     "@vueuse/nuxt": "^10.10.0"
   }

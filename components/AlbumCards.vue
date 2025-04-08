@@ -3,11 +3,10 @@
     class="flex hover:cursor-pointer w-min-[300px] h-fit shadow-sm"
     @mouseover="albumHover"
     @mouseleave="albumBack"
-    v-if="imgsDisplay.length == cloudinaryURL.length"
   >
     <NuxtImg
       v-for="(img, i) in imgsDisplay"
-      :src="`https://res.cloudinary.com/dqyh4h3oi/image/upload/f_auto/w_100/v1/Galeria/${props.title}/${props.title}_${i+1}`"
+      :src="`${img}`"
       alt="image"
       class="absolute rounded-lg border-2 shadow-sm w-24 object-cover max-h-16 transition-all"
       :class="`translate-x-${i * translateVal}`"
@@ -22,7 +21,6 @@
 const cloudinary = useCloudinary();
 const props = defineProps({
   coverImgs: Array,
-  cloudinaryURL: { required: true, type: Array }, //arr of string urls
   componentId: { required: true },
   title: { type: String },
 });
@@ -31,7 +29,7 @@ const translateVal = ref(0);
 
 const imgsDisplay = computed(() => {
   return props.coverImgs.map((img, i) => {
-    return cloudinary.createMiniImage(img).toURL();
+    return cloudinary.createMiniImage(img.img)
   });
 });
 
