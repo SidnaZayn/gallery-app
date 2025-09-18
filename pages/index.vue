@@ -22,7 +22,7 @@
         </span>
       </div>
       <div
-        class="absolute inset-0 z-10 w-full h-full bg-white dark:bg-slate-800 bg-opacity-50 dark:bg-opacity-50"
+        class="absolute inset-0 z-10 w-full h-full bg-white dark:bg-[#0E1217] bg-opacity-50 dark:bg-opacity-50"
       ></div>
       <div class="absolute z-0 inset-0 h-full">
         <div class="z-0 inset-0 h-full w-full">
@@ -46,7 +46,7 @@
         </div>
       </div>
       <div
-        class="absolute z-30 w-full h-auto bg-white dark:bg-slate-800 bottom-0 py-4"
+        class="absolute z-30 w-full h-auto bg-white dark:bg-[#0E1217] bottom-0 py-4"
       >
         <div
           v-if="$colorMode.preference === 'dark'"
@@ -117,7 +117,7 @@ const { width } = useWindowSize();
 
 onMounted(() => {
   sections.value = gsap.utils.toArray(".panel");
-  // toCarousel;
+
   gsap.to(sections.value, {
     xPercent: -100 * (sections.value.length - 1),
     ease: "none",
@@ -128,6 +128,26 @@ onMounted(() => {
       snap: 1 / (sections.value.length - 1),
       end: () => "+=" + document.querySelector(".container-gsap").offsetWidth,
     },
+  });
+
+  gsap.to(sections.value, {
+    scrollTrigger: {
+      trigger: ".container-gsap",
+      toggleActions: "restart pause reverse pause",
+      start: "top 80%",
+      end: () => "+=" + document.querySelector(".container-gsap").offsetWidth,
+      markers: true,
+      onLeaveBack: () => {
+        gsap.to(sections.value, {
+          scale: 1,
+          duration: 0.5,
+          ease: "bounce",
+        });
+      },
+    },
+    scale: 0.7,
+    ease: "bounce",
+    duration: 0.5,
   });
 });
 
@@ -170,7 +190,7 @@ const thisAlbum = computed(() => {
 .dark-spacer-pattern {
   --s: 20px;
   /* control the size*/
-  --c1: #1e293b;
+  --c1: #0E1217;
   --c2: #3a6961;
 
   --_g: var(--c1) 90deg, #0000 90.5deg;

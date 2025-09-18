@@ -10,7 +10,6 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@nuxt/image": "^1.7.0",
     "@nuxt/ui": "^2.15.2",
     "@pinia/nuxt": "^0.5.1",
     "cloudinary-build-url": "^0.2.4",
@@ -22,6 +21,7 @@
   },
   "devDependencies": {
     "@cld-apis/types": "^0.1.6",
+    "@nuxt/image": "^1.2.0",
     "@vueuse/core": "^10.10.0",
     "@vueuse/nuxt": "^10.10.0"
   }

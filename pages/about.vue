@@ -1,10 +1,10 @@
 <template>
   <div class="container pt-[10rem] w-10/12 mx-auto">
     <div class="header flex justify-center items-center gap-8">
-      <div class="p-6 rounded-full bg-slate-800 opacity-0" id="nuxt-icon">
+      <div class="p-6 rounded-full bg-[#0E1217] opacity-0" id="nuxt-icon">
         <NuxtImg src="/nuxt-icon.png" alt="logo" class="w-32" />
       </div>
-      <div class="p-8 rounded-full bg-slate-800 opacity-0" id="gsap-icon">
+      <div class="p-8 rounded-full bg-[#0E1217] opacity-0" id="gsap-icon">
         <NuxtImg src="/gsap-icon.png" alt="logo" class="w-32" />
       </div>
     </div>

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="grid grid-cols-1 gap-12 mobile-head rounded-full bg-white dark:bg-slate-800 w-[4rem] min-h-[4rem] py-4 shadow-2xl"
+    class="grid grid-cols-1 gap-12 mobile-head rounded-full bg-white dark:bg-[#0E1217] w-[4rem] min-h-[4rem] py-4 shadow-2xl"
   >
     <button @click="openMenu()" class="flex justify-center items-center">
       <IconsIconMenu

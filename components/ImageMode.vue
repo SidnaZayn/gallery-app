@@ -1,6 +1,6 @@
 <template>
   <div
-    class="fixed bottom-[5%] z-50 w-fit p-3 rounded-full bg-white dark:bg-slate-800 cursor-pointer"
+    class="fixed bottom-[5%] z-50 w-fit p-3 rounded-full bg-white dark:bg-[#0E1217] cursor-pointer"
     id="grid-mode"
     :class="[{ 'drop-shadow-img-mode': modeOpen === 1 }, isMobile ? 'left-[80%]' : 'left-[90%]']"
     @click="toAbout('grid')"
@@ -10,7 +10,7 @@
   </div>
 
   <div
-    class="fixed bottom-[5%] z-50 w-fit p-3 rounded-full bg-white dark:bg-slate-800 cursor-pointer"
+    class="fixed bottom-[5%] z-50 w-fit p-3 rounded-full bg-white dark:bg-[#0E1217] cursor-pointer"
     id="backtop-mode"
     :class="[{ 'drop-shadow-img-mode': modeOpen === 1 }, isMobile ? 'left-[80%]' : 'left-[90%]']"
     @click="toTop()"
@@ -20,7 +20,7 @@
   </div>
 
   <div
-    class="fixed bottom-[5%] z-50 w-fit p-3 rounded-full bg-white dark:bg-slate-800 cursor-pointer"
+    class="fixed bottom-[5%] z-50 w-fit p-3 rounded-full bg-white dark:bg-[#0E1217] cursor-pointer"
     id="zoomout-mode"
     :class="[{ 'drop-shadow-img-mode': modeOpen === 1 }, isMobile ? 'left-[80%]' : 'left-[90%]']"
     @click="zoomInOut()"
@@ -33,7 +33,7 @@
   </div>
 
   <div
-    class="fixed bottom-[5%] z-50 w-fit p-3 rounded-full bg-white dark:bg-slate-800 drop-shadow-img-mode cursor-pointer"
+    class="fixed bottom-[5%] z-50 w-fit p-3 rounded-full bg-white dark:bg-[#0E1217] drop-shadow-img-mode cursor-pointer"
     :class="[isMobile ? 'left-[80%]' : 'left-[90%]']"
     @click="openMode()"
   >
@@ -85,7 +85,7 @@ function toAbout() {
 
 function zoomInOut() {
   storeIndex.ImageZoomIn = !storeIndex.ImageZoomIn; //console.log(storeIndex.ImageZoomIn);
-  const tlZoom = gsap.timeline().to("#img-panel", {
+  gsap.timeline().to("#img-panel", {
     scale: storeIndex.ImageZoomIn ? 1 : 0.7,
   });
   closeMode("zoomout");

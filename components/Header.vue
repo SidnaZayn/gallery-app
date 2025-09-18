@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-10/12 rounded-xl shadow-2xl h-[10vh] bg-white dark:bg-slate-800 transition-all duration-1000 fixed top-8 left-1/2 translate-x-[-50%] z-[100]"
+    class="w-10/12 rounded-xl shadow-2xl h-[10vh] bg-white dark:bg-[#0E1217] transition-all duration-1000 fixed top-8 left-1/2 translate-x-[-50%] z-[100]"
     :class="[isMobile ? 'hidden' : 'block',{'bg-opacity-25 dark:bg-opacity-25': y > height - 80}]"
   >
     <div class="grid grid-cols-3 justify-between items-center h-full px-4">

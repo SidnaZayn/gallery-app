@@ -1,7 +1,7 @@
 <template>
   <div class="flex justify-center items-center h-[100vh]">
     <div
-      class="w-10/12 mx-auto h-[50%] bg-white dark:bg-slate-800 rounded-xl shadow-2xl"
+      class="w-10/12 mx-auto h-[50%] bg-white dark:bg-[#0E1217] rounded-xl shadow-2xl"
     >
       <div class="p-6 md:p-10 h-[100%]">
         <div class="text-center mb-10">
