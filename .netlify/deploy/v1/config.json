@@ -1,0 +1,7 @@
+{
+    "images":{
+        "remote_images":[
+            "https://res.cloudinary.com/.*"
+        ]
+    }
+}

@@ -25,5 +25,4 @@ logs
 !.env.example
 
 pages/test.vue
-# Local Netlify folder
-.netlify
+
