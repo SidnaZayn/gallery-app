@@ -69,7 +69,7 @@
               alt="image"
               class="w-full h-full max-h-screen object-cover"
               :class="[
-                storeIndex.ImageZoomIn ? '' : 'drop-shadow-img-mode rounded-xl',
+                storeIndex.ImageZoomIn ? '' : 'drop-shadow-img-mode',
               ]"
               loading="lazy"
             />
@@ -129,14 +129,14 @@ onMounted(() => {
       end: () => "+=" + document.querySelector(".container-gsap").offsetWidth,
     },
   });
-
+ 
   gsap.to(sections.value, {
     scrollTrigger: {
       trigger: ".container-gsap",
       toggleActions: "restart pause reverse pause",
       start: "top 80%",
       end: () => "+=" + document.querySelector(".container-gsap").offsetWidth,
-      markers: true,
+      markers: false,
       onLeaveBack: () => {
         gsap.to(sections.value, {
           scale: 1,
@@ -149,28 +149,6 @@ onMounted(() => {
     ease: "bounce",
     duration: 0.5,
   });
-});
-
-const imgs_ = import.meta.glob("../public/albums/**/*", {
-  query: "?url",
-  import: "default",
-  eager: true,
-});
-
-const thisAlbum = computed(() => {
-  const ret = [];
-  Object.keys(imgs_).forEach((album, i) => {
-    const al = album.replace("../public/albums/", "");
-    const group = al.split("/")[0];
-    //check if last 4 letters are ".jpg" or ".png" or ".jpeg"
-    if (group.split(".").length > 1) {
-      ret.push({ id: group, group: false });
-    } else {
-      const id = al.split("/")[1];
-      ret.push({ id: id, group: group });
-    }
-  });
-  return ret;
 });
 </script>
 
